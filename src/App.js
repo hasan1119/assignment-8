@@ -25,6 +25,8 @@ function App() {
     if (!isMatching) {
       const newSelectedMembers = [...selectedMembers, selected];
       setSelectedMembers(newSelectedMembers);
+    } else {
+      alert("Already Selected ⚠️");
     }
   }
 
