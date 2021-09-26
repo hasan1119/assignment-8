@@ -34,7 +34,7 @@ const Body = (props) => {
               ))}
             </ul>
           </div>
-          <button className="btn btn-primary w-100">Confirm</button>
+          <button className="btn mb-2 btn-primary w-100">Confirm</button>
         </div>
       </div>
     </div>
