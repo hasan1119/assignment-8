@@ -1,69 +1,45 @@
 import React from "react";
 import "./body.css";
+import Member from "../member/Member.js";
 
 const Body = (props) => {
   const { members, eventHandler, selectedMembers } = props;
+
+  // calculate total
   let total = 0;
   for (const member of selectedMembers) {
     total += Number(member.salary);
   }
+
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-9">
-          <DisplayMember
-            eventHandler={eventHandler}
-            members={members}
-          ></DisplayMember>
+      <div className="row d-flex flex-wrap justify-content-around">
+        <div style={{ width: "960px", marginRight: "400px" }}>
+          <Member eventHandler={eventHandler} members={members}></Member>
         </div>
-        <div className="col-3">
-          <h3>Player Added: {selectedMembers.length}</h3>
-          <h4>Total Cost: ${total}</h4>
-          {selectedMembers.map((member) => (
-            <SelectedMembers name={member.name}></SelectedMembers>
-          ))}
+        <div className="bg-dark shadow summary">
+          <div className="display-employ  pt-2">
+            <h3 style={{ fontFamily: "'Roboto', 'sans-serif'" }}>
+              Total Selected {selectedMembers.length} Employs
+            </h3>
+            <h6 className="text-center text-primary">Total Cost: ${total}</h6>
+            <hr />
+            <ul>
+              {selectedMembers.map((member) => (
+                <SelectedMembers name={member.name}></SelectedMembers>
+              ))}
+            </ul>
+          </div>
+          <button className="btn btn-primary w-100">Confirm</button>
         </div>
       </div>
     </div>
   );
 };
+
 function SelectedMembers(props) {
   const { name } = props;
-  return (
-    <div>
-      <p>{name}</p>
-    </div>
-  );
+  return <li className="text-muted">{name}</li>;
 }
-function DisplayMember(props) {
-  const { members, eventHandler } = props;
-  return (
-    <div className="d-flex flex-wrap justify-content-around">
-      {members.map((member) => {
-        return (
-          <div className="my-4" key={member.id}>
-            <div className="card" style={{ width: "15rem" }}>
-              <img src={member.img} className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">{member.name}</h5>
-                <p className="card-text">Post: {member.post}</p>
-                <p className="card-text">Age: {member.age}</p>
-                <p className="card-text">Address: {member.address}</p>
-                <p className="card-text">Salary: {member.salary}</p>
-                <div>
-                  <button
-                    onClick={() => eventHandler(member)}
-                    className="btn btn-primary"
-                  >
-                    add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+
 export default Body;
