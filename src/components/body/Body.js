@@ -24,9 +24,13 @@ const Body = (props) => {
             </h3>
             <h6 className="text-center text-primary">Total Cost: ${total}</h6>
             <hr />
-            <ul>
+            <ul className="list-unstyled">
               {selectedMembers.map((member) => (
-                <SelectedMembers name={member.name}></SelectedMembers>
+                <SelectedMembers
+                  key={member.id}
+                  name={member.name}
+                  img={member.img}
+                ></SelectedMembers>
               ))}
             </ul>
           </div>
@@ -38,8 +42,22 @@ const Body = (props) => {
 };
 
 function SelectedMembers(props) {
-  const { name } = props;
-  return <li className="text-muted">{name}</li>;
+  const { name, img } = props;
+  return (
+    <li className="text-muted mb-2">
+      <img
+        style={{
+          width: "40px",
+          borderRadius: "50%",
+          display: "inline-block",
+          marginRight: "10px",
+        }}
+        src={img}
+        alt=""
+      />
+      {name}
+    </li>
+  );
 }
 
 export default Body;
