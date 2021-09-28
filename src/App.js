@@ -17,6 +17,22 @@ function App() {
       .then((data) => setMembers(data));
   }, []);
 
+  useEffect(() => {
+    const cart = getCart();
+    setSelectedMembers(cart);
+  }, [members]);
+
+  function getCart() {
+    const existingCart = localStorage.getItem("cart");
+    let cart;
+    if (existingCart) {
+      cart = JSON.parse(existingCart);
+    } else {
+      cart = [];
+    }
+    return cart;
+  }
+
   //Event Handler
   function eventHandler(selected) {
     const isMatching = selectedMembers.find(
@@ -25,6 +41,7 @@ function App() {
     if (!isMatching) {
       const newSelectedMembers = [...selectedMembers, selected];
       setSelectedMembers(newSelectedMembers);
+      localStorage.setItem("cart", JSON.stringify(newSelectedMembers));
     } else {
       alert("Already Selected ⚠️");
     }

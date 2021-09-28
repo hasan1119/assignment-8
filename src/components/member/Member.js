@@ -12,6 +12,10 @@ function Member(props) {
             <div className="card pt-2" style={{ width: "18rem" }}>
               <div className="text-center">
                 <img
+                  style={{
+                    border: "1px solid #d4cbcb",
+                    boxShadow: "0px 0px 30px -12px black",
+                  }}
                   src={member.img}
                   className="card-img-top rounded-circle w-50"
                   alt="..."
