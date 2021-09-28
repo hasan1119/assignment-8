@@ -47,10 +47,25 @@ function App() {
     }
   }
 
+  function confirm() {
+    setSelectedMembers([]);
+    localStorage.setItem("cart", []);
+    alert("Thanks for Confirmation");
+  }
+
+  function Remove(name) {
+    const cart = getCart();
+    const newCart = cart.filter((person) => person.name !== name);
+    setSelectedMembers(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  }
+
   return (
     <div style={{ background: `url(${bg})`, backgroundAttachment: "fixed" }}>
       <Header></Header>
       <Body
+        Remove={Remove}
+        confirm={confirm}
         selectedMembers={selectedMembers}
         eventHandler={eventHandler}
         members={members}

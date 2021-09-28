@@ -1,9 +1,11 @@
 import React from "react";
 import "./body.css";
 import Member from "../member/Member.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../fontAwesome";
 
 const Body = (props) => {
-  const { members, eventHandler, selectedMembers } = props;
+  const { members, Remove, eventHandler, selectedMembers } = props;
 
   // calculate total
   let total = 0;
@@ -28,13 +30,19 @@ const Body = (props) => {
               {selectedMembers.map((member) => (
                 <SelectedMembers
                   key={member.id}
+                  Remove={Remove}
                   name={member.name}
                   img={member.img}
                 ></SelectedMembers>
               ))}
             </ul>
           </div>
-          <button className="btn mb-2 btn-primary w-100">Confirm</button>
+          <button
+            onClick={props.confirm}
+            className="btn mb-2 btn-primary w-100"
+          >
+            Confirm
+          </button>
         </div>
       </div>
     </div>
@@ -56,6 +64,18 @@ function SelectedMembers(props) {
         alt=""
       />
       {name}
+      <button className="btn py-1">
+        <small onClick={() => props.Remove(name)}>
+          <FontAwesomeIcon
+            style={{
+              color: "#b50000",
+              fontSize: "20px",
+              cursor: "pointer",
+            }}
+            icon={["far", "times-circle"]}
+          />
+        </small>
+      </button>
     </li>
   );
 }
